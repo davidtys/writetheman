@@ -1,3 +1,4 @@
+# Encoding: utf-8
 module Writetheman
   module Path
     attr_accessor :path_application
@@ -19,7 +20,7 @@ module Writetheman
       end     
 
       def list_source_files
-        Dir.glob( ::File.join(path_source_blog, "*") )
+        Dir.glob( ::File.join(path_source_blog, "*") ).select { |f| File.file?(f) }
       end         
 
   end

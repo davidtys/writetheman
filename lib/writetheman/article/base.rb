@@ -1,3 +1,4 @@
+# Encoding: utf-8
 module Writetheman
   module Article
     class Base
@@ -20,6 +21,7 @@ module Writetheman
       end
 
       def read
+        remove_content!
         init_filename if @filename.nil? || @filename.empty?
         read_file
         init_header_body_from_content
@@ -27,10 +29,16 @@ module Writetheman
       end  
 
       def load(filename)
+        remove_access!
         @filename = filename
         read
         @title = @header_params['title']
         @date = Date.parse(@header_params['date'])
+      end
+
+      def remove_all!
+        remove_access!
+        remove_content!
       end
 
     end

@@ -77,4 +77,5 @@ describe Writetheman::Article::Base do
       end
     end
   end  
+
 end

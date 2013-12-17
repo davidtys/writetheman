@@ -1,3 +1,4 @@
+# Encoding: utf-8
 module Writetheman
   module Article
     module File

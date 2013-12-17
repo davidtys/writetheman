@@ -1,3 +1,4 @@
+# Encoding: utf-8
 module Writetheman
   module Article
     module Content
@@ -6,6 +7,14 @@ module Writetheman
       def check_header_params_valid
         raise "title is empty in header params #{@header_params}" if !@header_params.include?( 'title' ) || @header_params['title'].empty?
         raise "date is empty in header params #{@header_params}" if !@header_params.include?( 'date' ) || @header_params['date'].empty?
+      end
+
+      def remove_content!
+        @all_content = ''
+        @body = ''
+        @header = ''
+        @header_params = {}
+        @tags = ''
       end
 
       private
@@ -61,12 +70,20 @@ module Writetheman
 
         def get_body_from_content
           raise "content is empty" if @all_content.nil? || @all_content.empty?
-          Utils::regex_body_from_content( @all_content ).strip!
+          begin
+            Utils::regex_body_from_content( @all_content ).strip!
+          rescue Exception => e 
+            raise "can't extract the body from content for the article #{@title} #{@filename} : \n#{e.message}"
+          end
         end
 
         def get_header_from_content
           raise "content is empty" if @all_content.nil? || @all_content.empty?
-          Utils::regex_header_from_content( @all_content )
+          begin
+            Utils::regex_header_from_content( @all_content )
+          rescue Exception => e 
+            raise "can't extract the header from content for the article #{@title} #{@filename} : \n#{e.message}"
+          end
         end  
         
         def get_header_lines_from_content

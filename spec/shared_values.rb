@@ -18,7 +18,7 @@ def get_random_tags
 end
 
 def get_random_body
-  '<p>'+Faker::Lorem.paragraphs(2).join("</p>\n<p>")+'</p>'
+  '<p>'+Faker::Lorem.paragraphs(2).join("</p>\n<p>")+'&eacute; &eacute;</p>'
 end
 
 

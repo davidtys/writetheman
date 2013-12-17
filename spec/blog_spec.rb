@@ -24,26 +24,18 @@ describe Writetheman::Blog do
     filepath1 = get_filepath(filename1)
     header1 = get_header(title1, tags, date)    
     content1 = get_content(header1, body)
-    title2 = get_random_title
-    filename2 = get_filename(title2)
-    filepath2 = get_filepath(filename2)
-    header2 = get_header(title2, tags, date)
-    content2= get_content(header2, body)
 
     before(:all) do
       file_create(filepath1, content1)
-      file_create(filepath2, content2)
     end    
     after(:all) do
       file_delete(filepath1)
-      file_delete(filepath2)
     end
 
     describe 'files' do
       it do
         files = blog.send( :list_source_files )
-        files.count.should eq(2)
-        files.should include(filepath2)
+        files.count.should eq(1)
         files.should include(filepath1)
       end
     end
@@ -51,15 +43,10 @@ describe Writetheman::Blog do
     describe 'articles' do
       it do
         articles = blog.list_articles
-        articles.count.should eq(2)        
-        articles.should have_key(title1)
-        articles[title1].title.should eq(title1)
-        articles[title1].filename.should eq(filename1)
-        articles[title1].all_content.should eq(content1)
-        articles.should have_key(title1)
-        articles[title2].title.should eq(title2)
-        articles[title2].filename.should eq(filename2)
-        articles[title2].all_content.should eq(content2)
+        articles.count.should eq(1)        
+        articles[0].title.should eq(title1) 
+        articles[0].filename.should eq(filename1)
+        articles[0].all_content.should eq(content1)
       end    
     end
 

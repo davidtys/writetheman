@@ -12,15 +12,13 @@ module Writetheman
 
       # if Windows-31J characters (don't need it with rich editor)
       # ex problem of encoding : http://www.weeklystandard.com/articles/silicon-chasm_768037.html
-      # @todo better encoding
-      def self.encoding_from_magazine(content)
-        content.gsub('’', "'").gsub('“', '"').gsub('”', '"')
-          .gsub('•', ' ').gsub('—', '-').gsub('¢', 'c').gsub('¡', '!').gsub('í', 'i')
-          .gsub('é', 'e').gsub('â', 'a').gsub(".  .  . ", ". . . ")
+      # solution from http://stackoverflow.com/questions/225471/how-do-i-replace-accented-latin-characters-in-ruby
+      def self.encoding_from_windows(content)
+        return ActiveSupport::Multibyte::Chars.new(content).mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').to_s
       end
 
       def self.special_encoding(content)
-        content = encoding_from_magazine( content )
+        content = encoding_from_windows( content )
         content
       end
 

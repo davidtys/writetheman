@@ -1,3 +1,4 @@
+# Encoding: utf-8
 module Writetheman
   module Article
     module Access
@@ -12,6 +13,11 @@ module Writetheman
         @filename = "#{format_date_file}-#{name}#{@extension}"
       end
 
+      def remove_access!
+        @title = ''
+        @date = nil
+        @str_date = ''
+      end
 
       private  
 

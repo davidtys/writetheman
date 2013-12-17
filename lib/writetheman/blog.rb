@@ -1,3 +1,4 @@
+# Encoding: utf-8
 module Writetheman
   class Blog
     include Path
@@ -6,16 +7,16 @@ module Writetheman
       @path_application = path_application
     end
 
-    def new_article
-      Article::Base.new(@path_application)
+    def new_article(filename='')
+      article = Article::Base.new(@path_application)
+      article.load(filename) if !filename.empty?
+      article
     end
 
     def list_articles
-      articles = {}
+      articles = []
       list_source_files.each do |filepath|
-        article = new_article
-        article.load(Pathname.new( filepath ).basename.to_s)
-        articles[article.title] = article
+        articles << new_article(Pathname.new( filepath ).basename.to_s)
       end
       articles
     end  
