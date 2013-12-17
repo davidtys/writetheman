@@ -3,10 +3,9 @@ module Writetheman
     module Content
       attr_accessor :all_content, :body, :header, :header_params, :tags
 
-      def header_params_valid?
-        return false if !@header_params.include?( 'title' )
-        return false if !@header_params.include?( 'date' )
-        true
+      def check_header_params_valid
+        raise "title is empty in header params #{@header_params}" if !@header_params.include?( 'title' ) || @header_params['title'].empty?
+        raise "date is empty in header params #{@header_params}" if !@header_params.include?( 'date' ) || @header_params['date'].empty?
       end
 
       private
@@ -18,6 +17,7 @@ module Writetheman
             @header += "#{index}: #{value}"
             @header += "\n" if i < @header_params.count - 1
           end
+          check_header_params_valid
           @header
         end
 

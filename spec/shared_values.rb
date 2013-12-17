@@ -23,7 +23,7 @@ end
 
 
 def get_filename(title=get_random_title(true), date=DateTime.now)
-  "#{date.strftime("%Y-%m-%d")}-#{title}.html.markdown"
+  "#{date.strftime("%Y-%m-%d")}-#{title.gsub(" ", "-")}.html.markdown"
 end
 
 def get_filepath(filename=get_filename)
@@ -31,12 +31,16 @@ def get_filepath(filename=get_filename)
   PATH_APPLICATION_SOURCE_BLOG + "/" + filename 
 end
 
+def get_date_header(date)
+  date.strftime("%Y-%m-%d %H:%M UTC")
+end
+
 def get_header(title=get_random_title, tags=get_random_tags, date=DateTime.now)
-  "title: " + title + "\ntags: " + tags + "\ndate: " + date.strftime("%Y-%m-%d %H:%M UTC")
+  "title: " + title + "\ntags: " + tags + "\ndate: " + get_date_header(date)
 end
 
 def get_header_params(title=get_random_title, tags=get_random_tags, date=DateTime.now)
-  { 'title' => title, 'tags' => tags, 'date' => date.strftime("%Y-%m-%d %H:%M UTC") }
+  { 'title' => title, 'tags' => tags, 'date' => get_date_header(date) }
 end
 
 def get_content(header=get_header, body=get_random_body)

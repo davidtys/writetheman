@@ -26,6 +26,13 @@ module Writetheman
         @all_content
       end  
 
+      def load(filename)
+        @filename = filename
+        read
+        @title = @header_params['title']
+        @date = Date.parse(@header_params['date'])
+      end
+
     end
   end
 end
