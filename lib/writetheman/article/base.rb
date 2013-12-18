@@ -20,21 +20,34 @@ module Writetheman
         create_file
       end
 
+      def create_from_params(params)
+        remove_access!
+        init_from_params(params)
+        create
+      end
+
       def read
         remove_content!
-        init_filename if @filename.nil? || @filename.empty?
+        init_filename
         read_file
         init_header_body_from_content
         @all_content
       end  
 
-      def load(filename)
+      def load_from_file(filename)
         remove_access!
         @filename = filename
         read
         @title = @header_params['title']
         @date = Date.parse(@header_params['date'])
       end
+
+      def load_from_title(title, date)
+        remove_access!
+        @title = title
+        @date = date
+        read
+      end      
 
       def remove_all!
         remove_access!

@@ -38,8 +38,8 @@ module Writetheman
 
         def init_header_params
           @header_params = {} if @header_params.nil?
-          @header_params['date'] = format_date_header( date ) if !header_params.include?( 'date' )        
-          @header_params['title'] = Utils::format_title( title )
+          @header_params['date'] = format_date_header if !header_params.include?( 'date' )        
+          @header_params['title'] = @title if !header_params.include?( 'title' )        
 
           @title = @header_params['title'] if @title.nil?
           @str_date = @header_params['date'] if @str_date.nil?

@@ -9,7 +9,7 @@ module Writetheman
 
     def new_article(filename='')
       article = Article::Base.new(@path_application)
-      article.load(filename) if !filename.empty?
+      article.load_from_file(filename) if !filename.empty?
       article
     end
 
