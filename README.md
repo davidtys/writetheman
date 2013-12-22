@@ -1,6 +1,7 @@
 # Writetheman
 
-TODO: Write a gem description
+Create, show and list the middleman blog articles.
+
 
 ## Installation
 
@@ -18,12 +19,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+config the path of your local middleman :
+article = Writetheman::Article::Base.new('/dev/ruby/middleman')
+blog = Writetheman::Blog.new('/dev/ruby/middleman')
 
-## Contributing
+from params :
+article.create_from_params(params['article'])
+article.load_from_file(filename)
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+or with the title and date of the file :
+article.load_from_title(title, date)
+
+or :
+article.title = title
+article.date = date
+article.create
+article.read
+
+list files :
+blog = Writetheman::Blog.new('/dev/ruby/middleman')
+articles = blog.list_articles

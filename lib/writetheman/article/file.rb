@@ -22,18 +22,18 @@ module Writetheman
           @all_content
         end
 
-        def delete_article_file(title, date)
-          check_path_source_blog
-          article_path = article_source_file_path( article_filename_from_title( title, date )  )
+        def delete_file(filename='')          
+          filename = @filename if filename.empty?
+          article_path = source_file_path(filename)
           raise "File doesn't exist : #{article_path}" if !::File.exist?( article_path )
           ::File.delete article_path
         end     
 
-
-        def source_file_path
-          raise "filename is empty" if @filename.nil? || @filename.empty?
+        def source_file_path(filename='')
+          filename = @filename if filename.empty?
+          raise "filename is empty" if filename.nil? || filename.empty?
           check_path_source_blog
-          path_source_blog + '/' + @filename
+          path_source_blog + '/' + filename
         end      
      
     end

@@ -49,6 +49,17 @@ module Writetheman
         read
       end      
 
+      def update(oldfilename)
+        delete_file(oldfilename)
+        create
+      end
+
+      def update_from_params(oldfilename, params)
+        remove_access!
+        init_from_params(params)
+        update(oldfilename)
+      end      
+
       def remove_all!
         remove_access!
         remove_content!

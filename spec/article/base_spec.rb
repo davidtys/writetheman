@@ -97,7 +97,7 @@ describe Writetheman::Article::Base do
     end
   end  
 
-  describe 'create'
+  describe 'create' do
     describe 'from params' do
       title = get_random_title
       date = DateTime.now
@@ -115,10 +115,67 @@ describe Writetheman::Article::Base do
 
       it do
         article.create_from_params( params )
-        
+
         File.exist?( filepath ).should be_true
         File.open( filepath, "rb").read.should eq( content )
       end
     end
+  end
 
+  describe 'update' do  
+    date = DateTime.now
+    oldtitle = get_random_title
+    oldfilename = get_filename( oldtitle, date )
+    oldfilepath = get_filepath( oldfilename )
+    oldcontent = get_content
+    newtitle = get_random_title
+    newfilename = get_filename( newtitle, date )
+    newfilepath = get_filepath( newfilename )
+    newtags = get_random_tags
+    newheader = get_header(newtitle, newtags, date)
+    newbody = get_random_body
+    newcontent = get_content( newheader, newbody )
+    newheader_params = get_header_params(newtitle, newtags, date)
+    newparams = { 'header' => newheader_params, 'body' => newbody }
+
+    describe 'from init' do
+    before(:all) { file_create(oldfilepath, oldcontent) }
+    after(:all) do 
+      file_delete(oldfilepath)
+      file_delete(newfilepath)
+    end
+
+      it do
+        File.exist?( oldfilepath ).should be_true
+        File.open( oldfilepath, "rb").read.should_not eq( newcontent )
+        article.title = newtitle
+        article.date = date
+        article.header = newheader
+        article.body = newbody
+        article.update( oldfilename )
+
+        File.exist?( oldfilepath ).should be_false
+        File.exist?( newfilepath ).should be_true
+        File.open( newfilepath, "rb").read.should eq( newcontent )
+      end
+    end
+
+    describe "from params" do
+      before(:all) { file_create(oldfilepath, oldcontent) }
+      after(:all) do 
+        file_delete(oldfilepath)
+        file_delete(newfilepath)
+      end
+
+      it do
+        File.exist?( oldfilepath ).should be_true
+        File.open( oldfilepath, "rb").read.should_not eq( newcontent )
+
+        article.update_from_params(oldfilename, newparams)
+        File.exist?( oldfilepath ).should be_false
+        File.exist?( newfilepath ).should be_true
+        File.open( newfilepath, "rb").read.should eq( newcontent )
+      end      
+    end          
+  end  
 end
