@@ -16,7 +16,7 @@ module Writetheman
     def list_articles
       articles = []
       list_source_files.each do |filepath|
-        articles << new_article(Pathname.new( filepath ).basename.to_s)
+        articles << new_article(Pathname.new(filepath).basename.to_s)
       end
       articles
     end  

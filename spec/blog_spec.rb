@@ -15,7 +15,6 @@ describe Writetheman::Blog do
   end
 
   describe 'list' do
-
     tags = get_random_tags
     date = DateTime.now
     body = get_random_body

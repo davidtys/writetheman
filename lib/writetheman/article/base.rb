@@ -20,9 +20,9 @@ module Writetheman
         create_file
       end
 
-      def create_from_params(params)
+      def create_from_params(params={})
         remove_access!
-        init_from_params(params)
+        init_from_params(params) if !params.empty?
         create
       end
 
@@ -54,9 +54,9 @@ module Writetheman
         create
       end
 
-      def update_from_params(oldfilename, params)
+      def update_from_params(oldfilename, params={})
         remove_access!
-        init_from_params(params)
+        init_from_params(params) if !params.empty?
         update(oldfilename)
       end      
 

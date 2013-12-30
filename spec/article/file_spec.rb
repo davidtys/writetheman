@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Writetheman::Article::File do 
-
   let(:article) { FactoryGirl.build( :article ) }
 
   describe 'create' do

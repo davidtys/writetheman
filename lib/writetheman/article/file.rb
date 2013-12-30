@@ -8,15 +8,15 @@ module Writetheman
 
         def create_file
           article_path = source_file_path
-          raise "File already exists : #{article_path}" if ::File.exist?( article_path )
+          raise "File already exists : #{article_path}" if ::File.exist?(article_path)
           raise "content is empty for create file #{@filename}" if @all_content.nil? || @all_content.empty?
-          file = ::File.open( article_path, 'w' ) { |f| f.write( @all_content ) ; f.close }
+          file = ::File.open(article_path, 'w') { |f| f.write(@all_content) ; f.close }
         end
 
         def read_file
           article_path = source_file_path
-          raise "File doesn't exist : #{article_path}" if !::File.exist?( article_path )
-          file = ::File.open( article_path, "rb")
+          raise "File doesn't exist : #{article_path}" if !::File.exist?(article_path)
+          file = ::File.open(article_path, "rb")
           @all_content = file.read
           file.close
           @all_content
@@ -25,7 +25,7 @@ module Writetheman
         def delete_file(filename='')          
           filename = @filename if filename.empty?
           article_path = source_file_path(filename)
-          raise "File doesn't exist : #{article_path}" if !::File.exist?( article_path )
+          raise "File doesn't exist : #{article_path}" if !::File.exist?(article_path)
           ::File.delete article_path
         end     
 

@@ -42,17 +42,17 @@ module Writetheman
 
         def convert_title_to_filename
            raise 'no title to convert' if @title.nil? || @title.empty?
-           I18n.transliterate( @title.gsub(" ", "-").gsub("'", "-").downcase )
+           I18n.transliterate(@title.gsub(" ", "-").gsub("'", "-").downcase)
         end  
 
         def format_date_file          
           raise 'no date to format' if @date.nil? 
-          @date.strftime( "%Y-%m-%d" )
+          @date.strftime("%Y-%m-%d")
         end
 
         def format_date_header
           raise 'no date to format' if @date.nil? 
-          @date.strftime( "%Y-%m-%d %H:%M UTC" ) 
+          @date.strftime("%Y-%m-%d %H:%M UTC") 
         end        
      
     end

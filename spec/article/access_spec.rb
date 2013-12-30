@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Writetheman::Article::Access do 
-
   let(:article) { FactoryGirl.build( :article ) }
 
   describe 'init filename' do

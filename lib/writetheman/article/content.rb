@@ -5,8 +5,8 @@ module Writetheman
       attr_accessor :all_content, :body, :header, :header_params, :tags
 
       def check_header_params_valid
-        raise "title is empty in header params #{@header_params}" if !@header_params.include?( 'title' ) || @header_params['title'].empty?
-        raise "date is empty in header params #{@header_params}" if !@header_params.include?( 'date' ) || @header_params['date'].empty?
+        raise "title is empty in header params #{@header_params}" if !@header_params.include?('title') || @header_params['title'].empty?
+        raise "date is empty in header params #{@header_params}" if !@header_params.include?('date') || @header_params['date'].empty?
       end
 
       def remove_content!
@@ -38,12 +38,12 @@ module Writetheman
 
         def init_header_params
           @header_params = {} if @header_params.nil?
-          @header_params['date'] = format_date_header if !header_params.include?( 'date' )        
-          @header_params['title'] = @title if !header_params.include?( 'title' )        
+          @header_params['date'] = format_date_header if !header_params.include?('date')        
+          @header_params['title'] = @title if !header_params.include?('title')        
 
           @title = @header_params['title'] if @title.nil?
           @str_date = @header_params['date'] if @str_date.nil?
-          @tags = @header_params['tags'] if @header_params.include?( 'tags' )
+          @tags = @header_params['tags'] if @header_params.include?('tags')
         end
 
         def init_header_params_from_content # get_header_params_from_content
@@ -71,7 +71,7 @@ module Writetheman
         def get_body_from_content
           raise "content is empty" if @all_content.nil? || @all_content.empty?
           begin
-            Utils::regex_body_from_content( @all_content ).strip!
+            Utils::regex_body_from_content(@all_content).strip!
           rescue Exception => e 
             raise "can't extract the body from content for the article #{@title} #{@filename} : \n#{e.message}"
           end
@@ -80,7 +80,7 @@ module Writetheman
         def get_header_from_content
           raise "content is empty" if @all_content.nil? || @all_content.empty?
           begin
-            Utils::regex_header_from_content( @all_content )
+            Utils::regex_header_from_content(@all_content)
           rescue Exception => e 
             raise "can't extract the header from content for the article #{@title} #{@filename} : \n#{e.message}"
           end

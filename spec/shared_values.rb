@@ -6,7 +6,6 @@ PATH_APPLICATION_BUILD = PATH_APPLICATION + '/build'
 PATH_APPLICATION_SOURCE_BLOG = PATH_APPLICATION_SOURCE + '/blog'
 PATH_APPLICATION_BUILD_BLOG = PATH_APPLICATION_BUILD + '/blog'
 
-
 def get_random_title(is_file=false)
   title = Faker::Lorem.words(3)
   is_file ? title = title.join('-') : title = title.join(' ')

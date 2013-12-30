@@ -5,7 +5,7 @@ module Writetheman
       REPLACE_CHARACTER = "|"
       
       def self.regex_header_from_content(content)
-        #content = format_multibyte( content )
+        #content = format_multibyte(content)
         content.gsub("\n", REPLACE_CHARACTER).match(/---(.*)---/).to_s.gsub(REPLACE_CHARACTER, "\n")
           .gsub("\r", "").gsub("---\n", "").gsub("\n---", "").gsub("---", "")
       end
@@ -18,16 +18,16 @@ module Writetheman
       end
 
       def self.special_encoding(content)
-        content = encoding_from_windows( content )
+        content = encoding_from_windows(content)
         content
       end
 
       def self.format_content_from_file(content)
-        content = special_encoding( content.force_encoding('utf-8') ).gsub("\r", "")
+        content = special_encoding(content.force_encoding('utf-8')).gsub("\r", "")
       end
 
       def self.regex_body_from_content(content)        
-        content = format_content_from_file( content )
+        content = format_content_from_file(content)
         content.match(/$(\n---\n)\s*$(.*)/ms).to_s.gsub("\n---\n", "")
       end
 

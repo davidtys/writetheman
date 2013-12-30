@@ -20,8 +20,16 @@ module Writetheman
       end     
 
       def list_source_files
-        Dir.glob( ::File.join(path_source_blog, "*") ).select { |f| File.file?(f) }
+        sort_files(list_files)
       end         
+
+      def list_files(path=path_source_blog)
+        Dir.glob(::File.join(path, "*")).select { |f| File.file?(f) }
+      end
+
+      def sort_files(files)
+        files.sort_by{ |f| File.mtime(f) }.reverse
+      end
 
   end
 end

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Writetheman::Article::Base do 
-
   let(:article) { FactoryGirl.build( :article ) }
 
   describe 'read' do
