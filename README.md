@@ -2,7 +2,7 @@
 
 Create, show and list the <a href='http://middlemanapp.com/basics/blogging/'>middleman blog</a> articles.
 
-It's used by my Rails middleman editor RailsTheMan
+It's used by my middleman editor <a href='https://github.com/davidtysman/railstheman'>RailsTheMan</a> to manage articles in the browser.
 
 ## Installation
 
