@@ -49,8 +49,13 @@ Read an article file
 
 	article.load_from_file(filename)
 	OR article.load_from_title(title, date)
-	
+
 After loading it you have access to the article attributes
+
+    puts(article.title)
+    puts(article.tags)
+    puts(article.str_date)
+    puts(article.body)
 
 List articles :
 
