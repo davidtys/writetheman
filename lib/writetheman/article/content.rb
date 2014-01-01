@@ -41,9 +41,19 @@ module Writetheman
           @header_params['date'] = format_date_header if !header_params.include?('date')        
           @header_params['title'] = @title if !header_params.include?('title')        
 
-          @title = @header_params['title'] if @title.nil?
-          @str_date = @header_params['date'] if @str_date.nil?
-          @tags = @header_params['tags'] if @header_params.include?('tags')
+          @title = @header_params['title'] if @title.nil? || @title.empty?
+          @str_date = @header_params['date'] if @str_date.nil? || @str_date.empty?
+          begin
+            @date = str_date_to_object if @date.nil? && !@str_date.nil? && !@str_date.empty?
+          rescue
+            puts "WARNING : can't convert the string date '#{@str_date}' to a date object when initialize article #{@title}"
+            @date = nil
+          end
+          @tags = @header_params['tags'] if (@tags.nil? || @tags.empty?) && @header_params.include?('tags')
+        end
+
+        def str_date_to_object
+          DateTime.strptime(@str_date, "%Y-%m-%d %H:%M")
         end
 
         def init_header_params_from_content # get_header_params_from_content

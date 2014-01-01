@@ -65,8 +65,10 @@ describe Writetheman::Article::Base do
       describe "access" do
         it do
           article.load_from_file(filename)
+          article.all_content.should eq( content )
           article.title.should eq(title)
           article.date.strftime("%Y-%m-%d").should eq(date.strftime("%Y-%m-%d"))
+          article.tags.should eq(tags)
         end        
       end
 
@@ -74,6 +76,9 @@ describe Writetheman::Article::Base do
         it do
           article.load_from_file(filename)
           article.all_content.should eq( content )
+          article.title.should eq(title)
+          article.date.strftime("%Y-%m-%d").should eq(date.strftime("%Y-%m-%d"))
+          article.tags.should eq(tags)
         end
       end
     end

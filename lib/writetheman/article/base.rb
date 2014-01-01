@@ -38,8 +38,9 @@ module Writetheman
         remove_access!
         @filename = filename
         read
-        @title = @header_params['title']
-        @date = Date.parse(@header_params['date'])
+        #@title = @header_params['title']
+        #@date = Date.parse(@header_params['date'])
+        init_header_params
       end
 
       def load_from_title(title, date)
