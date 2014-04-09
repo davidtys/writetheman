@@ -75,7 +75,7 @@ module Writetheman
           @header_params = init_header_params_from_content
           raise "no header params from header \n#{@header}\nand content \n#{@all_content}" if @header_params.nil? || @header_params.empty?
           @body = get_body_from_content
-          raise "no body from content \n#{@all_content}" if @body.nil? || @body.empty?
+          raise "no body from content \n#{@all_content}" if @body.nil? # || @body.empty?
         end
 
         def get_body_from_content
