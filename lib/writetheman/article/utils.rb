@@ -26,12 +26,14 @@ module Writetheman
         content = special_encoding(content.force_encoding('utf-8')).gsub("\r", "")
       end
 
+      # @todo : move in the rails admin (format from the editor)
       def self.format_readable_html(content)
         content.gsub("<br><h2>", "<h2>").gsub("<div><br></div><h1>", "<h1>")
           .gsub("><div>", "> \n<div>").gsub("</div><", "</div> \n<")
-          .gsub("><br>", "> \n<br> \n").gsub(".<br>", ". \n<br> \n")
+          .gsub("><p>", "> \n<p>").gsub("</p><", "</p> \n<")
+          .gsub("><br>", "> \n<br> \n").gsub(".<br>", ". \n<br> \n").gsub("<br >", "<br>")
           .gsub("<br></h1>", "</h1>").gsub("<br></h2>", "</h2>")
-          .gsub("  ", " &nbsp;&nbsp;")
+          .gsub("  ", "&nbsp;&nbsp;").gsub("&amp;amp;lt;", "<").gsub("<p> </p>", "<p>&nbsp;</p>")
       end
 
       def self.regex_body_from_content(content)        

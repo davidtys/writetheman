@@ -33,6 +33,7 @@ module Writetheman
         def init_content_from_header_body
           raise 'no header to get content' if @header.nil? || @header.empty?
           raise 'no body to get content' if @body.nil? || @body.empty?
+          format_body          
           @all_content = "---" + "\n" + @header + "\n" + "---" + "\n\n" + @body
         end
 
@@ -100,6 +101,9 @@ module Writetheman
            get_header_from_content.split("\n")
         end     
 
+        def format_body
+          @body = Utils::format_readable_html(@body)
+        end        
     end
   end
 end
