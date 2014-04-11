@@ -6,17 +6,7 @@ It's used by my middleman editor <a href='https://github.com/davidtysman/railsth
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'writetheman'
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install writetheman
+    gem install writetheman
 
 ## Usage
 
