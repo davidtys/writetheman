@@ -37,8 +37,8 @@ module Writetheman
       end
 
       def self.regex_body_from_content(content)        
-        content = format_content_from_file(content)
-        content.match(/$(\n---\n)\s*$(.*)/ms).to_s.gsub("\n---\n", "")
+        # content = format_content_from_file(content)
+        content.match(/$(\n---\n)\s*$(.*)/m).to_s.gsub("\n---\n", "")
       end
 
     end
